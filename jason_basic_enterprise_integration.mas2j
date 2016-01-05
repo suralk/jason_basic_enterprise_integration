@@ -1,0 +1,12 @@
+MAS jason_basic_enterprise_integration {
+
+	infrastructure: Centralised
+
+	environment: JasonEnvironment
+
+	agents:
+		agent1 sample_agent;
+
+	aslSourcePath:
+		"src/asl";
+}
