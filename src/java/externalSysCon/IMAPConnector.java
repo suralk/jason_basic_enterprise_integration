@@ -13,7 +13,7 @@ import java.util.*;
 import javax.mail.*;
 import javax.mail.internet.*;
 
-import utilities.ConfigurationPropertyManager;
+import access_utilities.ConfigurationPropertyManager;
 
 
 public class IMAPConnector extends DefaultInternalAction{

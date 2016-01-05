@@ -21,8 +21,7 @@ import java.io.InputStreamReader;
 
 import javax.naming.*;  
 
-import utilities.ConfigurationPropertyManager;
-//import javax.jms.*;
+import access_utilities.ConfigurationPropertyManager;
 
 public class SMTPConnector extends DefaultInternalAction{
 
