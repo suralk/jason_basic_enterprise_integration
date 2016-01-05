@@ -35,4 +35,3 @@ workers([agent1]).
      if (NumAnswered == NumAnswered) {     	
         +all_answers_received(QueryId);
     }.
-

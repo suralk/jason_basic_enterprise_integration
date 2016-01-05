@@ -12,16 +12,14 @@ import org.apache.zookeeper.ZooKeeper;
 import jason.asSemantics.DefaultInternalAction;
 import jason.asSemantics.TransitionSystem;
 import jason.asSemantics.Unifier;
-<<<<<<< HEAD
-=======
 import jason.asSyntax.Literal;
 import jason.asSyntax.StringTerm;
->>>>>>> d8d32d27e7a36b4fdbcfcb9604c5d1b783988a48
+
 import jason.asSyntax.Term;
 
 public class ZookeeperConnector extends DefaultInternalAction{
 
-<<<<<<< HEAD
+
 	private Properties prop;
 	protected static String HOST;
     protected static ZooKeeper zk;
@@ -47,8 +45,8 @@ public class ZookeeperConnector extends DefaultInternalAction{
         public void process(WatchedEvent event) {
         }
 	 }
-=======
-	
+
+	/*
 	public Object execute( TransitionSystem ts,	Unifier un,	Term[] args ) throws Exception {
 		if(args[0].isLiteral())		
 		{
@@ -59,7 +57,7 @@ public class ZookeeperConnector extends DefaultInternalAction{
 		}
 		
 		return null;
-	}	
->>>>>>> d8d32d27e7a36b4fdbcfcb9604c5d1b783988a48
+	}	*/
+
 
 }
