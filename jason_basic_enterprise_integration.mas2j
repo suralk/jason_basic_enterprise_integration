@@ -6,6 +6,10 @@ MAS jason_basic_enterprise_integration {
 
 	agents:
 		agent1 sample_agent;
+<<<<<<< HEAD
+=======
+		e_agent2 email_coordinator;
+>>>>>>> d8d32d27e7a36b4fdbcfcb9604c5d1b783988a48
 
 	aslSourcePath:
 		"src/asl";
