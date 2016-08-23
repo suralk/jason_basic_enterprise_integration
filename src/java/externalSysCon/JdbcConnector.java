@@ -20,9 +20,13 @@ public class JdbcConnector extends DefaultInternalAction{
 	
 	public JdbcConnector() throws Exception {
 		ConfigurationPropertyManager configManager = ConfigurationPropertyManager.getConfigurationPropertyManager();	    		
-		final String password = configManager.getPropValues("jdbc_pw");
-		Class.forName("com.mysql.jdbc.Driver");
-		connect = DriverManager.getConnection("jdbc:mysql://localhost/test?"+"user=root&password="+password);
+		//final String password = configManager.getPropValues("jdbc_pw");
+		//Class.forName("com.mysql.jdbc.Driver"); // This is an expression, not a statement!
+		String driver = "org.apache.derby.jdbc.EmbeddedDriver";
+		String dbName = "basic_enterprise_integration";
+		String connectionURL = "jdbc:derby:" + dbName + ";create=true";
+		// String connectionURL = "jdbc:mysql://localhost/test?"+"user=root&password="+password;
+		connect = DriverManager.getConnection(connectionURL);
 	}
 	
 	public Object execute(TransitionSystem ts,	Unifier un,	Term[] args ) throws Exception {
