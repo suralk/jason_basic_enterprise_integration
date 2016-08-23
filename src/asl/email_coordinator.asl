@@ -11,7 +11,8 @@ workers([agent1]).
 
 /* Plans */
 
-+!start : true <- //externalSysCon.SendReceiveEmail(1,EmailIds);
++!start  <-     .wait(5000);
+                //externalSysCon.SendReceiveEmail(1,EmailIds);
 				//print(EmailIds);
 				?last_query_number(QN);
 				QN1 = QN+1;
@@ -20,18 +21,21 @@ workers([agent1]).
    				 // it to send it back with its answer
    				//+recommended_agents(QN1, []);
    				+answered(QN1, []);
-    			.broadcast(askAll, interested_in(QN1, _	,_, _,User)); // Agent is a new variable here
+    			.broadcast(askAll, interested_in(QN1, "Great Uncle Sylvester Cranefield", "", "", User));
     			?timeout(TO);
-    			.wait({ +all_answers_received(QN1) },TO);    			
-    			.findall(User, interested_in(QN1, _, _,_,User), Users).
-    			
-+interested_in(QueryId,_,_,_,Answer)[source(Worker)] : workers(Workers) <- 
-    .print(Answer);   
+    			.wait(all_answers_received(QN1),TO,EventTime);
+    			.print("Elapsed time in wait: ", EventTime);    			
+    			.findall(User, interested_in(QN1, _, _,_,User), Users);
+    			.print("Interested users: ", Users).
+
++interested_in(QueryId,_,_,_,Answer)[source(Worker)] <- 
+    .print("Answer received from: ", Answer);   
     ?answered(QueryId, AnsweredSoFar);
      .union(AnsweredSoFar, [Worker], AnsweredNow);
     -+answered(QueryId, AnsweredNow);
     .length(AnsweredNow, NumAnswered);
-    .length(Workers, NumAnswered); // This could be precalculated when workers(ListOfWorkers) is asserted, and stored as a separate belief
-     if (NumAnswered == NumAnswered) {     	
+    ?workers(Workers);
+    .length(Workers, NumToAnswer); // This could be precalculated when workers(ListOfWorkers) is asserted, and stored as a separate belief
+     if (NumAnswered == NumToAnswer) {     	
         +all_answers_received(QueryId);
     }.

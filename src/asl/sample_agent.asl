@@ -3,7 +3,8 @@
 /* Initial beliefs and rules */
 //interested_in(1, 2, sample_agent).
 //interested_in(_,x,y).
-interested_in(_, From, Subject,Body, User) :- relevant(User, From, Subject,Body).
+interested_in(_, From, Subject, Body, User) :-
+  .print("interested_in rule triggered: From field is ", From) & relevant(User, From, Subject, Body).
 
 //interested_in(_,x,y1).
 //interested_in(y).
@@ -17,9 +18,11 @@ interested_in(_, From, Subject,Body, User) :- relevant(User, From, Subject,Body)
 +!start : true <- .print("hello world.");
                    .my_name(N);
                    externalSysCon.JdbcConnector(get_users,Users);
+                   .print("Users: ", Users);
                    //todo this should be move to the plan that gets trigred when zookeeper node changes
                    externalSysCon.JdbcConnector(get_rules,RulesAsStrings);
                    for (.member(RuleAsString, RulesAsStrings)) {
+                   	     .print("Rule found in database: ", RuleAsString);
     					 rules.add_rule(RuleAsString);
     					 //+RuleAsString;
    					};

@@ -1,4 +1,5 @@
 // Internal action code for project tell-rule.mas2j
+// Modified by Stephen Cranefield to return a literal, not a string
 
 package rules;
 
@@ -30,7 +31,9 @@ public class get_rules extends DefaultInternalAction {
                     if (un.clone().unifies(pattern, l)) {
                         l = l.copy();
                         l.delSources();
-                        result.add(new StringTermImpl(l.toString()));
+                        // result.add(new StringTermImpl(l.toString()));
+                        // Line above replaced with the folowing:
+                        result.add(l);
                     }
                 }
             }

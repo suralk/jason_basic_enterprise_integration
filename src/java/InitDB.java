@@ -58,7 +58,7 @@ public class InitDB {
         String insertUsers = "INSERT INTO USERS(USERNAME) VALUES "
                 + " ('crast78p'), ('bob')";
         String insertRules = "INSERT INTO RULES(RULE,USERNAME) VALUES "
-                + " ('relevant(crast78p, From, _) :- .substring(''Cranefield'', From)', 'crast78p'), "
+                + " ('relevant(crast78p, From, _Subject, _Body) :- .substring(\"Cranefield\", From)', 'crast78p'), "
                 + " ('role(crast78p, manage, project1)', '_global'), "
                 + " ('role(bob, minion, project1)', '_global')";
         String answer;

@@ -22,7 +22,7 @@ public class JdbcConnector extends DefaultInternalAction{
 		ConfigurationPropertyManager configManager = ConfigurationPropertyManager.getConfigurationPropertyManager();	    		
 		//final String password = configManager.getPropValues("jdbc_pw");
 		//Class.forName("com.mysql.jdbc.Driver"); // This is an expression, not a statement!
-		String driver = "org.apache.derby.jdbc.EmbeddedDriver";
+		//String driver = "org.apache.derby.jdbc.EmbeddedDriver";
 		String dbName = "basic_enterprise_integration";
 		String connectionURL = "jdbc:derby:" + dbName + ";create=true";
 		// String connectionURL = "jdbc:mysql://localhost/test?"+"user=root&password="+password;
@@ -34,11 +34,11 @@ public class JdbcConnector extends DefaultInternalAction{
 		if(args[0].toString().equals("get_users"))
 		{
 			statement = connect.createStatement();
-			resultSet = statement.executeQuery("select * from userinfo.users");
+			resultSet = statement.executeQuery("select * from USERS"); // NOTE: was userinfo.users for H2 database
 			ListTerm lt = new ListTermImpl();
 			
 			while (resultSet.next()) {
-				String name = resultSet.getString("user");			
+				String name = resultSet.getString("username"); // NOTE: was "user" for H2 database			
 				StringTerm st = new StringTermImpl(name);
 				lt.add(st);
 		    }
@@ -47,12 +47,12 @@ public class JdbcConnector extends DefaultInternalAction{
 		if(args[0].toString().equals("get_rules"))
 		{
 			statement = connect.createStatement();
-			resultSet = statement.executeQuery("select * from userinfo.rules");
+			resultSet = statement.executeQuery("select * from RULES"); // Note: was userinfo.rules for H2 database
 			ListTerm lt = new ListTermImpl();
 			
 			while (resultSet.next()) {
-				String name = resultSet.getString("rule");			
-				StringTerm st = new StringTermImpl(name);
+				String rule = resultSet.getString("rule");			
+				StringTerm st = new StringTermImpl(rule);
 				lt.add(st);
 		    }
 			return un.unifies(lt,args[1]);

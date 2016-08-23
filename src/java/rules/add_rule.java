@@ -30,17 +30,24 @@ public class add_rule extends DefaultInternalAction {
     }
     
     private void addRule(String sRule, TransitionSystem ts) {
-        // Next line added by Stephen Cranefield
-        sRule = sRule.replace("'", "\"");
+    	sRule = sRule.trim();
         int p = sRule.indexOf(":-");
-        if (p > 0) {
+        Literal head = null;
+        LogicalFormula body = null;
+        if (p == 0) {
+        	logger.info(sRule+" is not a rule!"); 
+            return;
+        }
+        else if (p < 0) {
+        	head = Literal.parseLiteral(sRule);
+        	body = Literal.LTrue;
+        }
+        else if (p > 0) {
             //logger.info("Adding rule: "+sRule);
-            Literal        head = Literal.parseLiteral(sRule.substring(0,p));
-            LogicalFormula body = LogExpr.parseExpr(sRule.substring(p+2));
-            ts.getAg().getBB().add(new Rule(head,body));
-        } else {
-            logger.info(sRule+" is not a rule!");               
-        }       
+            head = Literal.parseLiteral(sRule.substring(0,p));
+            body = LogExpr.parseExpr(sRule.substring(p+2));
+        }
+        ts.getAg().getBB().add(new Rule(head,body));       
     }
 }
 
